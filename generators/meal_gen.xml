@@ -1,0 +1,12 @@
+<pysert iterations="10">
+    <dataset name="meal_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="servings" type="NumberSequence" length="2"/>
+    <dataset name="meal_type" type="MealType"/>
+    <dataset name="image_url" type="RandomFoodImage"/>
+    <dataset name="date_for" type="Date" min_year="2013" max_year="2016"/>
+
+    <template>
+        INSERT INTO meal(`meal_id`, `servings`, `meal_type`, `image_url`, `date_for`) VALUES
+        ('#{meal_id}', '#{servings}', '#{meal_type}', '#{image_url}', '#{date_for}');
+    </template>
+</pysert>
