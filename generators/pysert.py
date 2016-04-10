@@ -334,6 +334,60 @@ class RandomFoodImage(AbstractDataSet):
 
 
 # ------------------------------------------------------------------------------
+class RandomIngredient(AbstractDataSet):
+    '''
+    ds_dict will contain the following:
+        {
+            "name" : <string value>
+            "result" : <string value>
+        }
+    '''
+
+    ''' Random food ingredients '''
+    ingredient_type_list = ['curry powder', 'succotash', 'heavy cream', 'tofu', 'leeks', 'raw sugar',
+                            'cream of tartar', 'dried leeks', 'cranberries', 'pig\'s feet', 'lemon juice',
+                            'rabbits', 'peaches', 'black-eyed peas', 'onion powder', 'coriander', 'cannellini beans',
+                            'tortillas', 'chickpeas', 'green beans', 'wine', 'brandy', 'brown rice',
+                            'orange peels', 'cider vinegar', 'haddock', ' wine vinegar', 'spinach', 'amaretto',
+                            'chard', 'brunoise', 'oatmeal', 'navy beans', 'berries', 'cooking wine', 'corn syrup',
+                            'mmolasses', 'swiss cheese', 'thyme', 'breadfruit', 'pepper', 'hot sauce', 'potato chips',
+                            'cornmeal', 'plum tomatoes', 'graham crackers', 'apricot', 'quail', 'almond paste',
+                            'almonds', 'melons', 'mozzarella', 'cream', 'focaccia', 'bard', 'pasta', 'cabbage',
+                            'rosemary', 'crabs', 'pumpkins', 'oregano', 'bacon', 'milk', 'venison', 'pesto', 'sushi',
+                            'lettuce', 'cantaloupes', 'kale', 'eggs', 'shrimp', 'pinto beans', 'tomatoes',
+                            'tomato paste', 'celery seeds', 'garlic powder', 'chicken', 'lamb', 'barbecue sauce',
+                            'mushrooms', 'salt', 'chicory', 'flour', 'onion', 'coconut oil', 'olives', 'passion fruit',
+                            'pea beans', 'cheese', 'tartar sauce', 'pine nuts', 'lobsters', 'plums', 'yogurt',
+                            'oranges', 'corn', 'turkeys', 'ale', 'red beans', 'chestnuts', 'truffles', 'cheddar cheese',
+                            'basil', 'pickles', 'buttermilk', 'potatoes', 'butter', 'sour cream', 'tarragon',
+                            'pork', 'soy beans', 'rice', 'figs', 'salmon', 'hazelnuts', 'broccoli', 'margarine', 'eel',
+                            'parsley', 'sauerkraut', 'beef', 'liver', 'mackerel', 'prunes', 'maple syrup', 'apples',
+                            'granola', 'pears', 'water', 'ham', 'radishes', 'bagels', 'honey', 'steak', 'macaroni',
+                            'pineapples', 'squid', 'cherries', 'walnuts', 'fish sauce', 'cocoa powder',
+                            'brussel sprouts', 'garlic', 'ketchup', 'tonic water', 'ginger', 'tuna']
+
+    ''' Unit amounts '''
+    ingredient_unit_amt_list = ['1/2', '1/4', '1/5', '3/4', '1/16', '1/8', '3/8', '2/3', '1/6', '1', '2', '3', '4', '5',
+                                '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+                                '100', '140', '160', '200', '240', '300', '180', '220', '250', '280', '500', '450']
+
+    ''' Ingredient unit '''
+    ingredient_unit_list = ['teaspoon', 'tablespoon', 'cup', 'oz', 'quart', 'lb', 'cubic centimeter', 'cm', 'liter',
+                            'ml', 'gram', 'kg', 'pint', 'gallon', 'ounce']
+
+    def validation_list(self):
+        return ['name', 'result']
+
+    def next_value(self):
+        if self.result == 'IngredientType':
+            return random.choice(self.ingredient_type_list)
+        elif self.result == 'IngredientUnitAmt':
+            return random.choice(self.ingredient_unit_amt_list)
+        elif self.result == 'IngredientUnit':
+            return random.choice(self.ingredient_unit_list)
+
+
+# ------------------------------------------------------------------------------
 class MealType(AbstractDataSet):
     '''
     ds_dict will contain the following:

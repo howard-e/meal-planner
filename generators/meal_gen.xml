@@ -5,8 +5,22 @@
     <dataset name="image_url" type="RandomFoodImage"/>
     <dataset name="date_for" type="Date" min_year="2013" max_year="2016"/>
 
+    <dataset name="ingredient_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="ingredient_type" type="RandomIngredient" result="IngredientType"/>
+    <dataset name="unit_amount" type="RandomIngredient" result="IngredientUnitAmt"/>
+    <dataset name="unit" type="RandomIngredient" result="IngredientUnit"/>
+    <dataset name="amount_in_stock" type="RandomNumber" floating="False" min="0" max="50"/>
+
+    <dataset name="instruction_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="content" type="LoremIpsum" length="50"/>
     <template>
         INSERT INTO meal(`meal_id`, `servings`, `meal_type`, `image_url`, `date_for`) VALUES
         ('#{meal_id}', '#{servings}', '#{meal_type}', '#{image_url}', '#{date_for}');
+
+        INSERT INTO ingredient(`ingredient_id`, `ingredient_type`, `unit_amount`, `unit`, `amount_in_stock`) VALUES
+        ('#{ingredient_id}', '#{ingredient_type}', '#{unit_amount}', '#{unit}', '#{amount_in_stock});
+
+        INSERT INTO instruction(`instruction_id`, `content`) VALUES
+        ('#{instruction_id}', '#{content}');
     </template>
 </pysert>
