@@ -87,4 +87,7 @@ ENV/
 # Rope project settings
 .ropeproject
 
+/generators/meal_gen.sql
+/generators/user_gen.sql
+/.idea/workspace.xml
 /.idea

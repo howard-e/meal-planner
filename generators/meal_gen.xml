@@ -1,26 +1,86 @@
 <pysert iterations="10">
+    <!-- Recipe -->
+    <dataset name="recipe_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="user_id" type="RandomNumber" floating="False" min="1" max="1000000"/>
+    <dataset name="calorie_count" type="RandomNumber" floating="False" min="10" max="2500"/>
+    <dataset name="created_at" type="Date" min_year="2013" max_year="2016"/>
+
+    <!-- Meal -->
     <dataset name="meal_id" type="Sequence" start="1" increment="1"/>
     <dataset name="servings" type="NumberSequence" length="2"/>
     <dataset name="meal_type" type="MealType"/>
     <dataset name="image_url" type="RandomFoodImage"/>
     <dataset name="date_for" type="Date" min_year="2013" max_year="2016"/>
 
+    <!-- Ingredient -->
     <dataset name="ingredient_id" type="Sequence" start="1" increment="1"/>
     <dataset name="ingredient_type" type="RandomIngredient" result="IngredientType"/>
-    <dataset name="unit_amount" type="RandomIngredient" result="IngredientUnitAmt"/>
     <dataset name="unit" type="RandomIngredient" result="IngredientUnit"/>
     <dataset name="amount_in_stock" type="RandomNumber" floating="False" min="0" max="50"/>
 
+    <!-- Instruction -->
     <dataset name="instruction_id" type="Sequence" start="1" increment="1"/>
-    <dataset name="content" type="LoremIpsum" length="50"/>
+
+    <!-- List -->
+    <dataset name="list_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="fulfilled" type="RandomNumber" floating="False" min="0" max="1"/>
+
+    <!-- Plan -->
+    <dataset name="plan_id" type="Sequence" start="1" increment="1"/>
+    <dataset name="start_date" type="Date" min_year="2013" max_year="2013"/>
+    <dataset name="end_date" type="Date" min_year="2014" max_year="2016"/>
+
+    <!-- list_item -->
+    <dataset name="list_item_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+    <dataset name="list_item_ingredient_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+    <dataset name="list_item_amount" type="RandomNumber" floating="False" min="1" max="100" />
+
+    <!-- recipe_requirement -->
+    <dataset name="amount" type="RandomIngredient" result="IngredientUnitAmt"/>
+
+    <!-- list_plan -->
+    <dataset name="list_plan_li_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+    <dataset name="list_plan_pl_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+
+    <!-- recipe_instruction -->
+    <dataset name="recipe_instruction_re_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+    <dataset name="recipe_instruction_in_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+
+    <!-- plan_item -->
+    <dataset name="plan_item_pl_id" type="RandomNumber" floating="False" min="1" max="1000000" />
+    <dataset name="plan_item_me_id" type="RandomNumber" floating="False" min="1" max="1000000" />
     <template>
-        INSERT INTO meal(`meal_id`, `servings`, `meal_type`, `image_url`, `date_for`) VALUES
+        INSERT INTO Recipe(`recipe_id`, `user_id`, `calorie_count`, `created_at`) VALUES
+        ('#{recipe_id}', '#{user_id}', '#{calorie_count}', '#{created_at}');
+
+        INSERT INTO Meal(`meal_id`, `servings`, `meal_type`, `image_url`, `date_for`) VALUES
         ('#{meal_id}', '#{servings}', '#{meal_type}', '#{image_url}', '#{date_for}');
 
-        INSERT INTO ingredient(`ingredient_id`, `ingredient_type`, `unit_amount`, `unit`, `amount_in_stock`) VALUES
-        ('#{ingredient_id}', '#{ingredient_type}', '#{unit_amount}', '#{unit}', '#{amount_in_stock});
+        INSERT INTO Ingredient(`ingredient_id`, `ingredient_type`, `unit`, `amount_in_stock`) VALUES
+        ('#{ingredient_id}', '#{ingredient_type}', '#{unit}', '#{amount_in_stock});
 
-        INSERT INTO instruction(`instruction_id`, `content`) VALUES
-        ('#{instruction_id}', '#{content}');
+        INSERT INTO Instruction(`instruction_id`, `content`) VALUES
+        ('#{instruction_id}', '#{amount} #{unit} of #{ingredient_type}');
+
+        INSERT INTO List(`list_id`, `fulfilled`) VALUES
+        ('#{list_id}', '#{fulfilled}');
+
+        INSERT INTO Plan(`plan_id`, `start_date`, `end_date`) VALUES
+        ('#{plan_id}', '#{start_date}', '#{end_date}');
+
+        INSERT INTO list_item(`list_id`, `ingredient_id`, `amount`) VALUES
+        ('#{list_item_id}', '#{list_item_ingredient_id}', '#{list_item_amount}');
+
+        INSERT INTO recipe_requirement(`recipe_id`, `ingredient_id`, `amount`) VALUES
+        ('#{recipe_id}', '#{ingredient_id}', '#{amount}');
+
+        INSERT INTO list_plan(`list_id`, `plan_id`) VALUES
+        ('#{list_plan_li_id}', '#{list_plan_pl_id}');
+
+        INSERT INTO recipe_instruction(`recipe_id`, `instruction_id`) VALUES
+        ('#{recipe_instruction_re_id}', '#{recipe_instruction_in_id}');
+
+        INSERT INTO list_plan(`plan_id`, `meal_id`) VALUES
+        ('#{plan_item_pl_id}', '#{plan_item_me_id}');
     </template>
 </pysert>

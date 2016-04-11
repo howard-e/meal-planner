@@ -1,4 +1,4 @@
-<pysert iterations="10">
+<pysert iterations="500000">
     <dataset name="user_id" type="Sequence" start="1" increment="1"/>
     <dataset name="email_address" type="AlphaNumeric" min_length="5" max_length="15" alphabet="True" numeric="True"/>
     <dataset name="password" type="AlphaNumeric" min_length="5" max_length="10" alphabet="True" numeric="True"/>
@@ -9,9 +9,10 @@
     <dataset name="phone" type="NumberSequence" length="7"/>
 
     <template>
-        INSERT INTO user(`user_id`, `email_address`, `password`) VALUES
+        INSERT INTO User(`user_id`, `email_address`, `password`) VALUES
         ('#{user_id}', '#{firstname}.#{lastname}@email.com', '#{password}');
-        INSERT INTO profile(`profile_id`, `firstname`, `lastname`, `phone`, `user_id`) VALUES
+
+        INSERT INTO Profile(`profile_id`, `firstname`, `lastname`, `phone`, `user_id`) VALUES
         ('#{profile_id}', '#{firstname}', '#{lastname}', '#{phone}', '#{user_id}');
     </template>
 </pysert>
